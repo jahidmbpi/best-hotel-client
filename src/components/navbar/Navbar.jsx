@@ -21,11 +21,14 @@ const Navbar = () => {
     <div className="m-auto text-center">
       <nav className="h-[70px] rounded-lg flex items-center justify-center my-[20px]">
         <div className="flex justify-between items-center w-full px-[10px]">
-          <img
-            className="h-[65px] w-[65px] rounded-lg"
-            src={logo}
-            alt="Hotel Logo"
-          />
+          <div className="flex text-center items-center ">
+            <img
+              className="h-[65px] w-[65px] rounded-lg"
+              src={logo}
+              alt="Hotel Logo"
+            />
+            <p className="text-2xl font-bold">Opal Blossom </p>
+          </div>
           <div className="flex flex-row text-black font-bold space-x-[20px] items-center">
             <NavLink to="/">home</NavLink>
             <NavLink to="/contact">contact</NavLink>

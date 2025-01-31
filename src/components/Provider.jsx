@@ -17,6 +17,7 @@ export const AuthContext = createContext();
 const Provider = ({ children }) => {
   const provider = new GoogleAuthProvider();
   const [user, setUser] = useState();
+  const [loader, setLoader] = useState(false);
   console.log(user);
 
   // register user
@@ -47,7 +48,16 @@ const Provider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const authInfo = { RegisterUsser, loginUser, setUser, googlelOgin, logOut };
+  const authInfo = {
+    RegisterUsser,
+    loginUser,
+    setUser,
+    googlelOgin,
+    logOut,
+    setLoader,
+    loader,
+    user,
+  };
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

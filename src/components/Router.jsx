@@ -3,6 +3,8 @@ import Roots from "./Roots";
 import Home from "./home/Home";
 import LogInPage from "./Athentication/LogInPage";
 import RegisterPage from "./Athentication/RegisterPage";
+import RoomCardDetails from "./room-section/RoomCardDetails";
+import BookingPage from "./bookingPage/BookingPage";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,18 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage></RegisterPage>,
+      },
+      {
+        path: "/carddetails/:id",
+        element: <RoomCardDetails></RoomCardDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/roomdetails/${params.id}`),
+      },
+      {
+        path: "/booking/:id",
+        element: <BookingPage />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/roomdetails/${params.id}`),
       },
     ],
   },
