@@ -32,7 +32,7 @@ const Navbar = () => {
           <div className="flex flex-row text-black font-bold space-x-[20px] items-center">
             <NavLink to="/">home</NavLink>
             <NavLink to="/contact">contact</NavLink>
-            <NavLink to="/my-booking">my booking</NavLink>
+            <NavLink to="/mybookings">my booking</NavLink>
             <NavLink to="/register">register</NavLink>
             <NavLink to="/login">
               <button className="btn btn-primary">log in</button>

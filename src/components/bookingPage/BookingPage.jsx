@@ -1,12 +1,16 @@
 import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../Provider";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import moment from "moment";
 
 const BookingPage = () => {
+  const { user } = useContext(AuthContext);
   const bokkingdata = useLoaderData();
   const { image, price, title } = bokkingdata;
-  const { user } = useContext(AuthContext);
 
+  const userEmail = user?.email;
   console.log(bokkingdata);
   const handelbooking = (e) => {
     e.preventDefault();
@@ -15,7 +19,9 @@ const BookingPage = () => {
     const username = from.name.value;
     const CheckinDate = from.CheckinDate.value;
     const CheckoutDate = from.CheckoutDate.value;
-    const userEmail = user?.email;
+    const creationdate = moment().format("MMMM Do YYYY, h:mm:ss a");
+    console.log(creationdate);
+
     const roomprice = price;
     const roomTitle = title;
     const roomImage = image;
@@ -27,9 +33,22 @@ const BookingPage = () => {
       roomprice,
       roomTitle,
       roomImage,
+      creationdate,
     };
     console.log(bookingData);
+    axios
+      .post("http://localhost:5000/bookings", bookingData)
+      .then((result) => {
+        console.log(result);
+        console.log("post data succesfully");
+        toast.success("Successfully created!");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
   };
+
   return (
     <div className=" m-auto w-full">
       <div className="card bg-[#F3F3F3] p-[70px] w-full shrink-0 shadow-2xl mb-[130px]">
@@ -102,22 +121,15 @@ const BookingPage = () => {
                 required
               />
             </div>
-            {/* <div className="lg:col-span-2 border border-2xl text-start">
-              <textarea
-                placeholder="Enter your message here..."
-                name="masage"
-                className="w-full h-[200px] rounded-2xl bg-[#FFFFFF] text-start p-4"
-                required
-              />
-            </div> */}
           </div>
           <div className="form-control mt-6">
             <button className="btn bg-[#FF3811] capitalize w-full">
-              order confirm
+              booking confirm
             </button>
           </div>
         </form>
       </div>
+      <Toaster />
     </div>
   );
 };

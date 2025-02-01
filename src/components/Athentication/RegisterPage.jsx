@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider";
+import axios from "axios";
 
 const RegisterPage = () => {
   const { RegisterUsser } = useContext(AuthContext);
@@ -10,17 +11,28 @@ const RegisterPage = () => {
     const UserEmail = from.email.value;
     const password = from.password.value;
     const UserPhoto = from.photo.value;
+    const userdata = { UserName, UserEmail, UserPhoto };
     console.log(UserEmail, UserName, password, UserPhoto);
     console.log(RegisterUsser);
+    from.reset();
     RegisterUsser(UserEmail, password)
       .then((res) => {
         const user = res.user;
         console.log(user);
+        axios
+          .post("http://localhost:5000/Alluser", userdata)
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="border-green-800 border-2 p-5 rounded-md shadow-lg">
