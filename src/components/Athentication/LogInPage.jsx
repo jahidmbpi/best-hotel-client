@@ -1,13 +1,12 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider";
-
-// import { GoogleAuthProvider } from "firebase/auth/web-extension";
-
-// git hub log in link
-// https:best-hotel-6a827.firebaseapp.com/__/auth/handler
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const LogInPage = () => {
   const { loginUser, googlelOgin } = useContext(AuthContext);
+
+  const navigate = useNavigate();
   const handelLogIn = (e) => {
     e.preventDefault();
     const from = e.target;
@@ -19,11 +18,13 @@ const LogInPage = () => {
       .then((result) => {
         const logednuser = result.user;
         console.log(logednuser);
+        toast.success("Successfully created!");
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
   const handelGoogleLogIn = () => {
     console.log("googole work");
     console.log();
@@ -33,6 +34,7 @@ const LogInPage = () => {
 
         const user = result.user;
         console.log(user);
+        toast.success("Successfully created!");
       })
       .catch((error) => {
         // eslint-disable-next-line no-unused-vars
@@ -40,7 +42,7 @@ const LogInPage = () => {
         console.log(error);
       });
   };
-
+  navigate("/");
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="border-green-800 border-2 p-5 rounded-md shadow-lg">
@@ -76,6 +78,7 @@ const LogInPage = () => {
           <button className="btn btn-neutral w-full">github</button>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

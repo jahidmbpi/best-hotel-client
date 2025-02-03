@@ -37,7 +37,9 @@ const BookingPage = () => {
     };
     console.log(bookingData);
     axios
-      .post("http://localhost:5000/bookings", bookingData)
+      .post("http://localhost:5000/bookings", bookingData, {
+        withCredentials: true,
+      })
       .then((result) => {
         console.log(result);
         console.log("post data succesfully");

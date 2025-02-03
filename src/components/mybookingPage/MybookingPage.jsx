@@ -9,7 +9,9 @@ const MybookingPage = () => {
   useEffect(() => {
     if (userEmail) {
       axios
-        .get(`http://localhost:5000/mybooking?email=${userEmail}`)
+        .get(`http://localhost:5000/mybooking?email=${userEmail}`, {
+          withCredentials: true,
+        })
         .then((result) => {
           console.log(result.data);
           setBokking(result.data);

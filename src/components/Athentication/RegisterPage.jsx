@@ -1,8 +1,11 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+  const Navigate = useNavigate();
   const { RegisterUsser } = useContext(AuthContext);
   const handelRegister = (e) => {
     e.preventDefault();
@@ -23,6 +26,8 @@ const RegisterPage = () => {
           .post("http://localhost:5000/Alluser", userdata)
           .then((result) => {
             console.log(result);
+            toast.success(" register Successfully");
+            Navigate("/login");
           })
           .catch((error) => {
             console.log(error);
@@ -69,6 +74,7 @@ const RegisterPage = () => {
           </div>
         </form>
       </div>
+      <Toaster />
     </div>
   );
 };

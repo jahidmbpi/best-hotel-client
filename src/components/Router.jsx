@@ -6,6 +6,7 @@ import RegisterPage from "./Athentication/RegisterPage";
 import RoomCardDetails from "./room-section/RoomCardDetails";
 import BookingPage from "./bookingPage/BookingPage";
 import MybookingPage from "./mybookingPage/MybookingPage";
+import PrivateRoute from "./privateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/mybookings",
-        element: <MybookingPage />,
+        element: (
+          <PrivateRoute>
+            <MybookingPage />
+          </PrivateRoute>
+        ),
       },
     ],
   },
