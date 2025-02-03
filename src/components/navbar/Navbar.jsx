@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/hotel-logo-icon-vector-hotel-logo-silhouette-building-vector-illustration_1199258-5038.avif";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../Provider";
+import axios from "axios";
 
 const Navbar = () => {
-  const { logOut } = useContext(AuthContext);
-  console.log(logOut);
+  const { logOut, user } = useContext(AuthContext);
+  const currentUserRmail = user?.email;
+  console.log(currentUserRmail);
 
   const handleLogOut = () => {
     logOut()
@@ -16,6 +18,18 @@ const Navbar = () => {
         console.log(error);
       });
   };
+  useEffect(() => {
+    if (currentUserRmail) {
+      axios
+        .get(`http://localhost:5000/savedUser?email=${currentUserRmail}`)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [currentUserRmail]);
 
   return (
     <div className="m-auto text-center">

@@ -19,6 +19,7 @@ const LogInPage = () => {
         const logednuser = result.user;
         console.log(logednuser);
         toast.success("Successfully created!");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
